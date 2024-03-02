@@ -1,12 +1,10 @@
-﻿using LibraryManagement.Infrastructure.Persistance;
+﻿using LibraryManagement.Application.Abstractions;
+using LibraryManagement.Domain.Entities.Models;
+using LibraryManagement.Infrastructure.BaseRepositories;
+using LibraryManagement.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManagement.Infrastructure
 {
@@ -18,6 +16,7 @@ namespace LibraryManagement.Infrastructure
             {
                 options.UseNpgsql(configuration.GetConnectionString("LibraryManagementConnectionString"));
             });
+            services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
             return services;
 
         }
