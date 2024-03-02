@@ -51,6 +51,23 @@ namespace LibraryManagement.Application.Services.BookService
             return result.Where(x=> x.BookName == name).ToList();
         }
 
+        public async Task<List<Book>> GetByCategory(string Category)
+        {
+            var result = await _bookRepository.GetAll();
+            return result.Where(x => x.Category == Category).ToList();
+        }
+        public async Task<List<Book>> GetByPublishedYear(int year)
+        {
+            var result = await _bookRepository.GetAll();
+            return result.Where(x => x.PublishedYear == year).ToList();
+        }
+        public async Task<List<Book>> GetBySector(string sector)
+        {
+            var result = await _bookRepository.GetAll();
+            return result.Where(x => x.BookShelfSector == sector).ToList();
+        }
+
+
         public async Task<Book> GetBookById(int id)
         {
             var result = await _bookRepository.GetByAny(x=>x.ID == id);
@@ -64,23 +81,27 @@ namespace LibraryManagement.Application.Services.BookService
             var result = await _bookRepository.GetByAny(x=> x.ID== ID);
             return result.BookShelfSector;
         }
-
+        public async Task<List<Book>> GetByAuthor(string authorName)
+        {
+            var result = await _bookRepository.GetAll();
+            return result.Where(x => x.AuthorName == authorName).ToList();
+        }
         public async Task<string> Update(int id, BookDTO bookDTO)
         {
             var res = await _bookRepository.GetByAny(x=> x.ID == id);
             
             if(res != null)
             {
+                var user = new Book()
+                {
+                    BookName = bookDTO.BookName,
+                    AuthorName = bookDTO.AuthorName,
+                    BookShelfSector = bookDTO.BookShelfSector,
+                    Category = bookDTO.Category,
+                    PublishedYear = bookDTO.PublishedYear,
+                };
 
-
-                res.BookName = bookDTO.BookName;
-                res.AuthorName = bookDTO.AuthorName;
-                res.BookShelfSector = bookDTO.BookShelfSector;
-                res.Category = bookDTO.Category;
-                res.PublishedYear = bookDTO.PublishedYear;
-               
-
-                var result = await _bookRepository.Update(res);
+                var result = await _bookRepository.Update(user);
                 if(result != null)
                 {
                     return "Updated";

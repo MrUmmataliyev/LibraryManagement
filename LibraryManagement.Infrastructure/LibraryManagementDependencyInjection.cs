@@ -18,6 +18,7 @@ namespace LibraryManagement.Infrastructure
             });
             services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
             services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             return services;
 
         }
