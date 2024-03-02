@@ -22,7 +22,7 @@ namespace LibraryManagement.API.Controllers
             return await _userService.GetAll();
         }
         [HttpPost]
-        public async Task<string> CreateUser(UserDTO userDTO)
+        public async Task<string> CreateUser([FromForm] UserDTO userDTO)
         {
             return await _userService.CreateUser(userDTO);
         }
