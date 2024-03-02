@@ -1,9 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LibraryManagement.Application.Abstractions;
+using LibraryManagement.Application.Abstractions.IService;
+using LibraryManagement.Application.Services.BookService;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace LibraryManagement.Application
 {
@@ -11,6 +10,7 @@ namespace LibraryManagement.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddScoped<IBookService, BookService>();
             return services;
         }
     }

@@ -33,6 +33,7 @@ namespace LibraryManagement.Application.Services.BookService
 
             if(book != null)
             {
+                await _bookRepository.Create(book);
                 return "Added";
             }
             return "Failed";
@@ -44,7 +45,7 @@ namespace LibraryManagement.Application.Services.BookService
             return result;
         }
 
-        public async Task<List<Book>> GetAllBook(string category)
+        public async Task<List<Book>> GetAllBook()
         {
             var result = await _bookRepository.GetAll();
             return result.ToList();

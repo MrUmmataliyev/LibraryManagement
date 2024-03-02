@@ -17,6 +17,7 @@ namespace LibraryManagement.Infrastructure
                 options.UseNpgsql(configuration.GetConnectionString("LibraryManagementConnectionString"));
             });
             services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
+            services.AddScoped<IBookRepository, BookRepository>();
             return services;
 
         }
