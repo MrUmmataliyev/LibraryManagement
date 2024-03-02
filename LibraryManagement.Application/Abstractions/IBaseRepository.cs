@@ -9,5 +9,6 @@ namespace LibraryManagement.Application.Abstractions
         public Task<bool> Delete(Expression<Func<T, bool>> expression);
         public Task<T> GetByAny(Expression<Func<T, bool>> expression);
         public Task<IEnumerable<T>> GetAll();
+        
     }
 }
