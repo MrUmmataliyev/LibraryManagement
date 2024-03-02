@@ -2,12 +2,6 @@
 using LibraryManagement.Application.Abstractions.IService;
 using LibraryManagement.Domain.Entities.DTOs;
 using LibraryManagement.Domain.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManagement.Application.Services.BookService
 {
@@ -51,7 +45,11 @@ namespace LibraryManagement.Application.Services.BookService
             return result.ToList();
         }
 
-
+        public async Task<List<Book>> GetByName(string name)
+        {
+            var result = await _bookRepository.GetAll();
+            return result.Where(x=> x.BookName == name).ToList();
+        }
 
         public async Task<Book> GetBookById(int id)
         {
@@ -73,16 +71,16 @@ namespace LibraryManagement.Application.Services.BookService
             
             if(res != null)
             {
-                var user = new Book()
-                {
-                    BookName = bookDTO.BookName,
-                    AuthorName = bookDTO.AuthorName,
-                    BookShelfSector = bookDTO.BookShelfSector,
-                    Category = bookDTO.Category,
-                    PublishedYear = bookDTO.PublishedYear,
-                };
 
-                var result = await _bookRepository.Update(user);
+
+                res.BookName = bookDTO.BookName;
+                res.AuthorName = bookDTO.AuthorName;
+                res.BookShelfSector = bookDTO.BookShelfSector;
+                res.Category = bookDTO.Category;
+                res.PublishedYear = bookDTO.PublishedYear;
+               
+
+                var result = await _bookRepository.Update(res);
                 if(result != null)
                 {
                     return "Updated";

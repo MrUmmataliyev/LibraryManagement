@@ -24,6 +24,13 @@ namespace LibraryManagement.API.Controllers
 
             return result;
         }
+        [HttpGet]
+        public async Task<List<Book>> GetByName(string Name)
+        {
+            var result = await _bookService.GetByName(Name);
+
+            return result;
+        }
         [HttpPost]
         public async Task<string> CreateUser(BookDTO model)
         {

@@ -15,7 +15,7 @@ namespace LibraryManagement.Application.Abstractions.IService
         public Task<Book> GetBookById(int id);
 
         public Task<List<Book>> GetAllBook();
-
+        public Task<List<Book>> GetByName(string name);
         public Task<string> GetBookSector(int ID);
         public Task<bool> Delete(int id);
         public Task<string> Update(int id, BookDTO bookDTO);
