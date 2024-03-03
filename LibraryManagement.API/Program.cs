@@ -23,7 +23,7 @@ namespace LibraryManagement.API
             builder.Services.AddSwaggerGen(
                 c =>
                 {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Future Projects", Version = "v1.0.0", Description = "Future Projects Auth API" });
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library Management", Version = "v1.0.0", Description = "Created by Ummataliyev Muhammadabdulloh" });
                     var securitySchema = new OpenApiSecurityScheme
                     {
                         Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",

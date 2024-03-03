@@ -3,6 +3,7 @@ using LibraryManagement.Application.Abstractions.IService;
 using LibraryManagement.Application.Services.UserService;
 using LibraryManagement.Domain.Entities.DTOs;
 using LibraryManagement.Domain.Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -12,6 +13,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace LibraryManagement.Application.Services.AuthService
@@ -39,14 +41,27 @@ namespace LibraryManagement.Application.Services.AuthService
             var findUser = await FindUser(request);
             if (findUser!=null)
             {
-                
 
+                var permission = new List<int>();
+                
+                if (findUser.Role != "Admin")
+                {
+                    permission = new List<int> { 10, 11, 12, 13, 14, 15, 16, 17 };
+                }
+                else
+                {
+                    permission = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
+
+
+                }
+                var jsonContent = JsonSerializer.Serialize(permission);
                 List<Claim> claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Role, findUser.Role),
                     new Claim("Login", findUser.Login),
                     new Claim("UserID", findUser.UserId.ToString()),
                     new Claim("CreatedDate", DateTime.UtcNow.ToString()),
+                    new Claim("Permissions", jsonContent)
                 };
 
                 return await GenerateToken(claims);
