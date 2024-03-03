@@ -33,10 +33,18 @@ namespace LibraryManagement.Application.Services.BookService
             return "Failed";
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<string> Delete(int id)
         {
             var result =await _bookRepository.Delete(x => x.ID == id);
-            return result;
+            if (result)
+            {
+                return "Deleted";
+            }
+            else
+            {
+                return "Failed";
+            }
+           
         }
 
         public async Task<List<Book>> GetAllBook()
@@ -92,16 +100,16 @@ namespace LibraryManagement.Application.Services.BookService
             
             if(res != null)
             {
-                var user = new Book()
-                {
-                    BookName = bookDTO.BookName,
-                    AuthorName = bookDTO.AuthorName,
-                    BookShelfSector = bookDTO.BookShelfSector,
-                    Category = bookDTO.Category,
-                    PublishedYear = bookDTO.PublishedYear,
-                };
 
-                var result = await _bookRepository.Update(user);
+
+                res.BookName = bookDTO.BookName;
+                res.AuthorName = bookDTO.AuthorName;
+                res.BookShelfSector = bookDTO.BookShelfSector;
+                res.Category = bookDTO.Category;
+                res.PublishedYear = bookDTO.PublishedYear;
+               
+
+                var result = await _bookRepository.Update(res);
                 if(result != null)
                 {
                     return "Updated";

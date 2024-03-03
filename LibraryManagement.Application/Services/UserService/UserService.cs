@@ -48,9 +48,17 @@ namespace LibraryManagement.Application.Services.UserService
             return "Such email already exists";
         }
 
-        public Task<string> DeleteUser(int id)
+        public async Task<string> DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            var result = await _userRepo.Delete(x=> x.UserId == id);
+            if (result)
+            {
+                return "Deleted";
+            }
+            else
+            {
+                return "Failed";
+            }
         }
 
         public async Task<List<UserViewModel>> GetAll()
@@ -150,7 +158,7 @@ namespace LibraryManagement.Application.Services.UserService
                     old.Role = userDTO.Role;
 
                     
-                    await _userRepo.Create(old);
+                    await _userRepo.Update(old);
                     return "Updated";
 
                 }

@@ -21,7 +21,7 @@ namespace LibraryManagement.Application.Abstractions.IService
         public Task<List<Book>> GetBySector(string sector);
         public Task<List<Book>> GetByPublishedYear(int year);
         public Task<string> GetBookSector(int ID);
-        public Task<bool> Delete(int id);
+        public Task<string> Delete(int id);
         public Task<string> Update(int id, BookDTO bookDTO);
     }
 }
