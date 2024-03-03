@@ -24,7 +24,7 @@ namespace LibraryManagement.Application.Services.UserService
         {
             var res = await _userRepo.GetAll();
             var email = res.Any(x => x.Email == userDTO.Email);
-            var login = res.Any(x => x.Login == userDTO.Email);
+            var login = res.Any(x => x.Login == userDTO.Login);
             if (!email)
             {
                 if(!login)
