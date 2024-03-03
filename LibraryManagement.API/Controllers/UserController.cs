@@ -70,5 +70,27 @@ namespace LibraryManagement.API.Controllers
         {
             return await _userService.DeleteUser(id);
         }
+        [HttpGet("download")]
+        [IdentityFilter(Permission.GetUserPDF)]
+        public async Task<IActionResult> DownloadFile()
+        {
+            // Replace this with the path to the file you want to download
+            var filePath = await _userService.GetPdfPath();
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound("File not found");
+
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+
+
+            var contentType = "application/octet-stream";
+
+            var fileExtension = Path.GetExtension(filePath).ToLowerInvariant();
+
+
+            // Send the file as a response
+            return File(fileBytes, contentType, Path.GetFileName(filePath));
+        }
     }
 }

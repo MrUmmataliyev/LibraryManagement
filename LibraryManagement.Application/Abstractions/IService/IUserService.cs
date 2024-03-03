@@ -18,6 +18,8 @@ namespace LibraryManagement.Application.Abstractions.IService
         public Task<List<UserViewModel>> GetByName(string fullName);
         public Task<UserViewModel> GetById(int id);
         public Task<UserViewModel> GetByEmail(string email);
-        
+        Task<string> GetPdfPath();
+
+
     }
 }

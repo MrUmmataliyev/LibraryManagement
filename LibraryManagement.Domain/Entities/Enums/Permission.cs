@@ -26,7 +26,8 @@ namespace LibraryManagement.Domain.Entities.Enums
         GetBySector=16,
         GetByAuthor=17,
         UpdateBook=18,
-        DeleteBook=19
+        DeleteBook=19,
+        GetUserPDF=20
 
     }
 }
