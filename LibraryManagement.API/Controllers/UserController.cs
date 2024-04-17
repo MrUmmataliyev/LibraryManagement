@@ -60,15 +60,15 @@ namespace LibraryManagement.API.Controllers
         }
         [HttpPut]
         //[IdentityFilter(Permission.UpdateUser)]
-        public async Task<string> UpdateUser(int id, UserDTO userDTO)
+        public async Task<MessageFor> UpdateUser(int id, UserDTO userDTO)
         {
-            return await _userService.UpdateUser(id, userDTO);
+            return new MessageFor { message = await _userService.UpdateUser(id, userDTO) };
         }
         [HttpDelete]
         //[IdentityFilter(Permission.DeleteUser)]
-        public async Task<string> DeleteUser(int id)
+        public async Task<MessageFor> DeleteUser(int id)
         {
-            return await _userService.DeleteUser(id);
+            return new MessageFor { message = await _userService.DeleteUser(id) };
         }
         [HttpGet("download")]
         //[IdentityFilter(Permission.GetUserPDF)]
