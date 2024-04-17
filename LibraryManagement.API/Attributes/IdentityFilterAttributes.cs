@@ -6,29 +6,29 @@ using System.Text.Json;
 
 namespace LibraryManagement.API.Attributes
 {
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Enum)]
-    public class IdentityFilterAttribute : Attribute, IAuthorizationFilter
-    {
-        private readonly int _permissionId;
+    //[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Enum)]
+    //public class IdentityFilterAttribute : Attribute, IAuthorizationFilter
+    //{
+    //    private readonly int _permissionId;
 
-        public IdentityFilterAttribute(Permission permissionId)
-        {
-            _permissionId = (int)permissionId;
-        }
+    //    public IdentityFilterAttribute(Permission permissionId)
+    //    {
+    //        _permissionId = (int)permissionId;
+    //    }
 
-        public async void OnAuthorization(AuthorizationFilterContext context)
-        {
-            var identity = context.HttpContext.User.Identity as ClaimsIdentity;
+    //    public async void OnAuthorization(AuthorizationFilterContext context)
+    //    {
+    //        var identity = context.HttpContext.User.Identity as ClaimsIdentity;
 
-            var permissionIds = identity.FindFirst("Permissions")?.Value;
+    //        var permissionIds = identity.FindFirst("Permissions")?.Value;
 
-            var result = JsonSerializer.Deserialize<List<int>>(permissionIds).Any(x => _permissionId == x);
+    //        var result = JsonSerializer.Deserialize<List<int>>(permissionIds).Any(x => _permissionId == x);
 
-            if (!result)
-            {
-                context.Result = new ForbidResult();
-                return;
-            }
-        }
-    }
+    //        if (!result)
+    //        {
+    //            context.Result = new ForbidResult();
+    //            return;
+    //        }
+    //    }
+    //}
 }

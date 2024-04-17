@@ -12,7 +12,7 @@ namespace LibraryManagement.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class BookController : ControllerBase
     {
         private readonly IBookService _bookService;
@@ -24,7 +24,7 @@ namespace LibraryManagement.API.Controllers
 
 
         [HttpPost]
-        [IdentityFilter(Permission.AddBook)]
+        //[IdentityFilter(Permission.AddBook)]
         public async Task<string> AddBook(BookDTO model)
         {
             var result = await _bookService.Add(model);
@@ -32,20 +32,20 @@ namespace LibraryManagement.API.Controllers
             return result;
         }
         [HttpGet]
-        [IdentityFilter(Permission.GetByBookId)]
+        //[IdentityFilter(Permission.GetByBookId)]
         public async Task<Book> GetByBookId(int id)
         {
             return await _bookService.GetBookById(id);
         }
         [HttpGet]
-        [IdentityFilter(Permission.GetSector)]
+        //[IdentityFilter(Permission.GetSector)]
         public async Task<string> GetSector(int id)
         {
             return await _bookService.GetBookSector(id);
         }
 
         [HttpGet]
-        [IdentityFilter(Permission.GetAllBook)]
+        //[IdentityFilter(Permission.GetAllBook)]
         public async Task<List<Book>> GetAllBook()
         {
             var result = await _bookService.GetAllBook();
@@ -53,7 +53,7 @@ namespace LibraryManagement.API.Controllers
             return result;
         }
         [HttpGet]
-        [IdentityFilter(Permission.GetByBookName)]
+        //[IdentityFilter(Permission.GetByBookName)]
         public async Task<List<Book>> GetByBookName(string Name)
         {
             var result = await _bookService.GetByName(Name);
@@ -61,38 +61,38 @@ namespace LibraryManagement.API.Controllers
             return result;
         }
         [HttpGet]
-        [IdentityFilter(Permission.GetByCategory)]
+        //[IdentityFilter(Permission.GetByCategory)]
         public async Task<List<Book>> GetByCategory(string catergory)
         {
             return await _bookService.GetByCategory(catergory);
         }
         [HttpGet]
-        [IdentityFilter(Permission.GetByPublishedYear)]
+        //[IdentityFilter(Permission.GetByPublishedYear)]
         public async Task<List<Book>> GetByPublishedYear(int year)
         {
             return await _bookService.GetByPublishedYear(year);
         }
         [HttpGet]
-        [IdentityFilter(Permission.GetBySector)]
+        //[IdentityFilter(Permission.GetBySector)]
         public async Task<List<Book>> GetBySector(string sector)
         {
             return await _bookService.GetBySector(sector);
         }
         [HttpGet]
-        [IdentityFilter(Permission.GetByAuthor)]
+        //[IdentityFilter(Permission.GetByAuthor)]
         public async Task<List<Book>> GetByAuthor(string author)
         {
             return await _bookService.GetByAuthor(author);
         }
 
         [HttpPut]
-        [IdentityFilter(Permission.UpdateBook)]
+        //[IdentityFilter(Permission.UpdateBook)]
         public async Task<string> UpdateBook(int id, BookDTO bookDTO)
         {
             return await _bookService.Update(id, bookDTO);
         }
         [HttpDelete]
-        [IdentityFilter(Permission.DeleteBook)]
+        //[IdentityFilter(Permission.DeleteBook)]
         public async Task<string> DeleteBook(int id)
         {
             return await _bookService.Delete(id);

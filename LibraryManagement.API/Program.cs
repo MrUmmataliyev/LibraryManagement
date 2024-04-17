@@ -45,6 +45,18 @@ namespace LibraryManagement.API
                     c.AddSecurityRequirement(securityRequirement);
                 }
                 );
+            builder.Services.AddCors(options => {
+                options.AddPolicy(name: "First", policy =>
+                {
+                    policy.AllowAnyHeader()
+                          .AllowAnyOrigin()
+                          .AllowAnyMethod();
+                });
+
+
+
+
+            });
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(
                    options =>
@@ -74,6 +86,7 @@ namespace LibraryManagement.API
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("First");
             
             app.UseAuthentication();
 
