@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  librarymanagement.api:
+    image: ${DOCKER_REGISTRY-}librarymanagementapi
+    build:
+      context: .
+      dockerfile: LibraryManagement.API/Dockerfile
+    depends_on:
+       - dbf
+    networks:
+      - db-network
+  dbf:
+    container_name: dbf
+    image: librarymanagementapi:dev
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=7257320
+      - POSTGRES_DB=LibraryManagementDB
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - db-network
+networks:
+  db-network:
+    driver: bridge
+
+volumes:
+  pgdata:
